@@ -1,0 +1,19 @@
+pragma solidity >=0.5.13 < 0.7.3;
+
+contract datatypes{
+    
+    address public myAddr;
+    
+    constructor() public{
+        myAddr=msg.sender;
+    }
+
+    function setaddr(address _addr) public
+    {
+        myAddr=_addr;
+    }
+
+    function getEthersAmount() public view returns(uint){
+       return myAddr.balance; // balance its like inbuilt global function 
+    }
+}
