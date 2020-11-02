@@ -1,0 +1,21 @@
+pragma solidity >=0.5.13 < 0.7.3;
+
+contract charitySmartContract{
+    
+    address public owner;
+    mapping(address => uint) public addressToEtherMap;
+    
+    constructor() public{
+        owner=msg.sender;
+    }
+    
+    function receiveEthers() public payable{
+        addressToEtherMap[msg.sender]=msg.value;
+    }
+    
+    function withdrawAllEthers() public{
+        require(msg.sender==owner, "You cannot withdraw!");
+        address payable to=msg.sender;
+        to.transfer(address(this).balance);
+    }
+}
