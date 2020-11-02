@@ -1,0 +1,11 @@
+pragma solidity >=0.5.15 < 0.7.3;
+
+contract datatypes{
+
+bool public Myboolean;
+
+function setbool() public
+{
+Myboolean=true;
+}
+}
