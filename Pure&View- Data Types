@@ -1,0 +1,19 @@
+pragma solidity >=0.5.13 <0.7.3;
+
+contract pureview{
+    address owner;
+    string st;
+    
+    constructor() public{
+        owner=msg.sender;
+        st="Adi";
+    }
+    
+    function getValue() public view returns(string memory){
+        return(st);
+    }
+    
+    function getValuePure(uint a, uint b) public pure returns(uint256){
+        return(a+b);
+    }
+}
