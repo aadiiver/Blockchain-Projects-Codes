@@ -1,0 +1,39 @@
+pragma solidity >=0.5.13 < 0.7.3;
+
+contract charitySmartContract{
+    
+    address public owner;
+    bool public isPause;
+    
+    constructor() public{
+        owner=msg.sender;
+    }
+    
+    function receiveEthers() public payable{
+    }
+    
+    function withdrawAllEthers() public{
+        require(msg.sender==owner, "You cannot withdraw!");
+        require(!isPause,"Contract is Paused!");
+        address payable to=msg.sender;
+        to.transfer(address(this).balance);
+    }
+    
+    function setPause(bool _ispause)public{
+        require(msg.sender==owner, "You don't have access!");
+        isPause=_ispause;
+    }
+    
+    function setNewOwner(address _newOwner) public{
+        require(msg.sender==owner, "You don't have access!");
+        require(!isPause,"Contract is Paused!");
+        owner=_newOwner;
+    }
+    
+    function terminateThisSmartContract() public{
+        require(msg.sender==owner, "You cannot withdraw!");
+        require(!isPause,"Contract is Paused!");
+        address payable to=msg.sender;
+        selfdestruct(to);
+    }
+}
