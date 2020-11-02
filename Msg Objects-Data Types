@@ -1,0 +1,27 @@
+pragma solidity >=0.5.13 < 0.7.3;
+
+contract datatypes{
+    uint public totalBal;
+    address public myAddr;
+    
+    constructor() public{
+        myAddr=msg.sender;
+    }
+
+    function recieveEthers() public payable{
+        totalBal+=msg.value;
+    }
+    
+    function withdrawEthers() public{
+        address payable to=msg.sender;
+        to.transfer(address(this).balance);
+    }
+    
+    function withdrawEthersTothisEOA(address payable _EOAAddr) public{
+        _EOAAddr.transfer(address(this).balance);
+    }
+    
+    function currentEthersinContract() public view returns(uint256){
+        return address(this).balance;
+    }
+}
